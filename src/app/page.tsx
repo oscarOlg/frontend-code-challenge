@@ -1,95 +1,80 @@
-import Image from 'next/image'
+"use client";
 import styles from './page.module.css'
+import { UsersListContainer } from './Components/UsersListContainer';
+import { useState, useEffect } from 'react';
+import { UserData, UserListComponentProps } from './types';
 
-export default function Home() {
+export const Home = () => {
+  const [usersData, setUsersData] = useState<UserData>({results: []});
+  const [defaultData, setDefaultData] = useState<UserData>({results: []});
+  const [filteredData, setFilteredData] = useState<UserData>({results: []});
+  const [isDataLoading, setIsDataLoading] = useState(false); 
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setFilteredData(usersData)
+  }, [usersData])
+  
+
+  const resetData = () => {
+    setUsersData(defaultData);
+    setFilteredData(defaultData);
+  }
+
+  const handleOnDeleteClick = (id: string) => {
+    const newUsers = filteredData.results.filter(user => user.login.uuid !== id);
+    setFilteredData({results: newUsers});
+  }
+
+  const handleSearchByCountry = (country: string) => {
+    if(country.length) { 
+      const normCountry = country.toLocaleLowerCase();
+      const filteredData = [...usersData.results].filter(user => user.location.country.toLowerCase().match(normCountry));
+      setFilteredData({results: filteredData});
+    } else {
+      setFilteredData({results: []});
+    }
+  }
+
+  const UserListProps: UserListComponentProps = {
+    usersData: filteredData.results.length ? filteredData : usersData,
+    isDataLoading, 
+    resetData,
+    handleOnDeleteClick,
+    handleSearchByCountry,
+    hasError: error,
+  }
+
+  const fetchUsers = (numOfUsers: number) => {
+    fetch(`https://randomuser.me/api/?results=${numOfUsers}`)
+      .then(response =>{
+        if(response.ok) {
+          return response.json();
+        }
+        throw response;
+      })
+      .then(data => {
+        setUsersData(data);
+        setDefaultData(data);
+      })
+      .catch(error => {
+        console.error(error);
+        setError(true);
+      })
+      .finally(() => {
+        setIsDataLoading(false);
+      })
+  }
+
+  useEffect(() => {
+    setIsDataLoading(true);
+    fetchUsers(100);
+  }, []);
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <h1>Users list</h1>
+      {<UsersListContainer {...UserListProps} />} 
     </main>
   )
 }

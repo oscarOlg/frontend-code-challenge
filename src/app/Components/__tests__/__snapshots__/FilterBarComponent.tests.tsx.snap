@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserListContainer tests Should render FilterBarComponent correctly 1`] = `
+<body>
+  <div>
+    <div
+      class="filterbar-container"
+      data-testid="filter-bar"
+    >
+      <button
+        data-testid="change-color-button"
+      >
+        Color table
+      </button>
+      <button
+        data-testid="sort-button"
+      >
+        Sort by country
+      </button>
+      <button
+        data-testid="reset-button"
+      >
+        reset
+      </button>
+      <input
+        data-testid="search-input"
+        placeholder="Search by Country"
+      />
+    </div>
+  </div>
+</body>
+`;

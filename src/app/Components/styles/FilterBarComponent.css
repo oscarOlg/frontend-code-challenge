@@ -1,0 +1,6 @@
+.filterbar-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    height: 30px;
+}

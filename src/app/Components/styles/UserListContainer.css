@@ -1,0 +1,53 @@
+
+.users-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.loading-title {
+    justify-self: center;
+    color: black;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.users-table {
+    display: table;
+    width: 90vw;
+    table-layout: auto;
+}
+
+.users-table-headers {
+    display: table-header-group;
+    font-weight: bold;
+    text-align: center;
+}
+
+.user-table-rows {
+    display: table-row-group;
+    text-align: center;
+}
+
+.user-table-row {
+    display: table-row;
+}
+
+.user-table-cell {
+    display: table-cell;
+    margin: auto;
+    padding: 5px;
+}
+
+.user-table-row .user-table-cell {
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.error-title {
+    display: flex;
+    padding: 30px;
+    background-color: rgb(99, 0, 0);
+    color: red;
+}

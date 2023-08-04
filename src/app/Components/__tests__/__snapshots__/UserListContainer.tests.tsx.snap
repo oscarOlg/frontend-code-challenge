@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserListContainer tests Should render UserListContainer correctly when there is data 1`] = `
+<body>
+  <div>
+    <div
+      class="users-page-container"
+    >
+      <div
+        class="filterbar-container"
+        data-testid="filter-bar"
+      >
+        <button
+          data-testid="change-color-button"
+        >
+          Color table
+        </button>
+        <button
+          data-testid="sort-button"
+        >
+          Sort by country
+        </button>
+        <button
+          data-testid="reset-button"
+        >
+          reset
+        </button>
+        <input
+          data-testid="search-input"
+          placeholder="Search by Country"
+        />
+      </div>
+      <div
+        class="users-table"
+        data-testid="users-data-table"
+      >
+        <div
+          class="users-table-headers"
+        >
+          <div
+            class="user-table-cell"
+          >
+            Avatar
+          </div>
+          <div
+            class="user-table-cell"
+          >
+            Name
+          </div>
+          <div
+            class="user-table-cell"
+          >
+            Last Name
+          </div>
+          <div
+            class="user-table-cell"
+          >
+            Country
+          </div>
+          <div
+            class="user-table-cell"
+          >
+            Actions
+          </div>
+        </div>
+        <div
+          class="user-table-rows"
+          style="color: black; border-color: black; background-color: white;"
+        >
+          <div
+            class="user-table-row"
+          >
+            <div
+              class="user-table-cell"
+            >
+              <img
+                alt="Roseni de Souza avatar"
+                data-nimg="1"
+                decoding="async"
+                height="25"
+                loading="lazy"
+                src="/_next/image?url=https%3A%2F%2Frandomuser.me%2Fapi%2Fportraits%2Fthumb%2Fwomen%2F33.jpg&w=64&q=75"
+                srcset="/_next/image?url=https%3A%2F%2Frandomuser.me%2Fapi%2Fportraits%2Fthumb%2Fwomen%2F33.jpg&w=32&q=75 1x, /_next/image?url=https%3A%2F%2Frandomuser.me%2Fapi%2Fportraits%2Fthumb%2Fwomen%2F33.jpg&w=64&q=75 2x"
+                style="color: transparent;"
+                width="25"
+              />
+            </div>
+            <div
+              class="user-table-cell"
+            >
+              Roseni
+            </div>
+            <div
+              class="user-table-cell"
+            >
+              de Souza
+            </div>
+            <div
+              class="user-table-cell"
+            >
+              Brazil
+            </div>
+            <div
+              class="user-table-cell"
+            >
+              <button
+                data-testid="delete-button-abc123"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
